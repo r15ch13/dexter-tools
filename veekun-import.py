@@ -74,10 +74,11 @@ def enhancePokemonInformation(conn, pokemonData):
 
         if entry:
 
-            if 'identifier' not in entry['pokemon']:
-                entry['pokemon'] = prependIdentifier(pokemon, row['identifier'])
-
             pokemon = entry['pokemon']
+
+            if 'identifier' not in pokemon:
+                pokemon = prependIdentifier(pokemon, row['identifier'])
+
             pokemon['genus'] = row['genus']
             pokemon['color'] = row['color']
             pokemon['genderRate'] = row['gender_rate']
