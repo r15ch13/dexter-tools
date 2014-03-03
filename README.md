@@ -18,3 +18,8 @@ Generate Pokedex SQLite database.
 > bin/pokedex reindex
 ```
 For more information see [Getting-Data](https://github.com/veekun/pokedex/wiki/Getting-Data) on Veekun Pokedex Wiki.
+
+## Importing data
+```
+python veekun-import.py
+```
