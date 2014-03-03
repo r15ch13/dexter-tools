@@ -2,7 +2,7 @@
 
 Tools for importing or manipulating [Dexter](https://github.com/AwestruckStudios/Gen6) Pokémon data.
 
-# Setting up Veekun Pokedex
+## Setting up Veekun Pokedex
 Install Pokedex with Python virtualenv.
 
 ```
