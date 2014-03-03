@@ -1,6 +1,19 @@
 #!/usr/bin/env python2
 # coding: UTF-8
 
+# Pokedex SQLite Database
+pokedexDatabase = "veekun-pokedex/pokedex/data/pokedex.sqlite"
+
+# Dexter pokemon.poke File
+pokemonPoke = "Dexter-Gen6/pokemon.poke"
+
+# Override pokemon.poke file with new data
+updateFile = True
+
+# If updateFile is False, the output goes to another file
+pokemonPokeNew = "Dexter-Gen6/pokemonNew.poke"
+
+#### Start
 import sqlite3, json, collections
 from collections import OrderedDict
 
@@ -217,26 +230,39 @@ def addPokedexNumbers(conn, pokemonData):
     return
 
 
-pokedexDatabase = "pokedex/data/pokedex.sqlite"
-pokemonData = []
-
 conn = sqlite3.connect(pokedexDatabase)
 conn.row_factory = sqlite3.Row
 
-with open('pokemon.poke') as data_file:
+# Pokemon data
+pokemonData = []
+
+print "Reading to " + pokemonPoke
+with open(pokemonPoke) as data_file:
     pokemonData = json.load(data_file, object_pairs_hook=collections.OrderedDict)
 
 if pokemonData != []:
 
+    print "Adding/Updating additional Pokemon information"
     enhancePokemonInformation(conn, pokemonData)
+
+    print "Adding/Updating egg moves"
     addEggMoves(conn, pokemonData)
+
+    print "Adding/Updating effort values"
     addEffortValues(conn, pokemonData)
+
+    print "Adding/Updating Pokedex numbers"
     addPokedexNumbers(conn, pokemonData)
 
     pokemonJson = json.dumps(pokemonData, ensure_ascii=False).encode('utf8')
 
-    with open('pokemon.poke', 'w') as save_file:
-    # with open('pokemonUpdated.poke', 'w') as save_file:
-        save_file.write(pokemonJson)
+    if updateFile:
+        print "Saving to " + pokemonPoke
+        with open(pokemonPoke, 'w') as save_file:
+            save_file.write(pokemonJson)
+    else:
+        print "Saving to " + pokemonPokeNew
+        with open(pokemonPokeNew, 'w') as save_file:
+            save_file.write(pokemonJson)
 
 conn.close()
