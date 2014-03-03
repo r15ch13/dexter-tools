@@ -1,0 +1,6 @@
+[submodule "Dexter-Gen6"]
+	path = Dexter-Gen6
+	url = https://github.com/AwestruckStudios/Gen6.git
+[submodule "veekun-pokedex"]
+	path = veekun-pokedex
+	url = https://github.com/veekun/pokedex.git
